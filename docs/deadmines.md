@@ -61,7 +61,7 @@ notice; `instance_deadmines_classic.cpp` is AzerothCore's own classic script (GN
 ## Works with other modules
 
 - Needs [mod-temucraft-world](https://github.com/Temucraft/mod-temucraft-world). Nothing else.
-- [mod-temucraft-shadowfang-keep](https://github.com/Temucraft/mod-temucraft-shadowfang-keep) does the same for
+- [mod-temucraft-instances](https://github.com/Temucraft/mod-temucraft-instances) does the same for
   Shadowfang Keep.
 
 Part of the Temucraft modules for AzerothCore 3.3.5a.

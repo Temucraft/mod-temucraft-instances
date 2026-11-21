@@ -68,6 +68,6 @@ AzerothCore's notice). The Cataclysm Apothecary Hummel script isn't ported: Azer
 ## Works with other modules
 
 - Needs [mod-temucraft-world](https://github.com/Temucraft/mod-temucraft-world). Nothing else.
-- [mod-temucraft-deadmines](https://github.com/Temucraft/mod-temucraft-deadmines) does the same for The Deadmines.
+- [mod-temucraft-instances](https://github.com/Temucraft/mod-temucraft-instances) does the same for The Deadmines.
 
 Part of the Temucraft modules for AzerothCore 3.3.5a.
