@@ -16,6 +16,7 @@
 */
 
 #include "TemucraftTCCompat.h"
+#include "SpellMgr.h"
 #include "GameEventMgr.h"
 #include "Containers.h"
 #include "ObjectMgr.h"
@@ -70,6 +71,11 @@ enum Spells
     SPELL_RIPSNARLS_FOG_AURA                = 89247
 };
 
+enum TemucraftRipsnarlNpcs
+{
+    NPC_TEMUCRAFT_DEFIAS_CANNON             = 48266
+};
+
 enum Events
 {
     // Admiral Ripsnarl
@@ -120,7 +126,14 @@ class boss_admiral_ripsnarl: public CreatureScript
             {
                 BossAI::JustEngagedWith(who);
                 Talk(SAY_AGGRO);
-                DoCastAOE(SPELL_RIPSNARL_CANNON_KILL, true);
+                // Temucraft: Ripsnarl Cannon Kill (95408) isn't in Spell.dbc; it only killed the Defias Cannons, so do that here
+                {
+                    std::list<Creature*> cannons;
+                    me->GetCreatureListWithEntryInGrid(cannons, NPC_TEMUCRAFT_DEFIAS_CANNON, 200.0f);
+                    for (Creature* cannon : cannons)
+                        if (cannon->IsAlive())
+                            cannon->KillSelf();
+                }
                 instance->SendEncounterUnit(ENCOUNTER_FRAME_ENGAGE, me);
                 events.ScheduleEvent(EVENT_SWIPE, Seconds(3) + Milliseconds(500));
                 if (IsHeroic())
@@ -302,7 +315,8 @@ class npc_ripsnarl_vapor : public CreatureScript
 
             void IsSummonedBy(WorldObject* /*summoner*/) override
             {
-                DoCastSelf(SPELL_STEAM_AURA, true);
+                if (sSpellMgr->GetSpellInfo(SPELL_STEAM_AURA)) // Temucraft: a look only, not in Spell.dbc
+                    DoCastSelf(SPELL_STEAM_AURA, true);
                 if (Player* player = me->SelectNearestPlayer(50.0f))
                     me->AI()->AttackStart(player);
 

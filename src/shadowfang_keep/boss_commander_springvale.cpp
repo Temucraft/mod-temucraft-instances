@@ -229,7 +229,9 @@ public:
                     case EVENT_SHIELD_OF_THE_PERFIDIOUS:
                         me->RemoveAurasDueToSpell(SPELL_UNHOLY_POWER);
                         me->RemoveAurasDueToSpell(SPELL_UNHOLY_POWER_HC);
-                        DoCast(SPELL_SHIELD_OF_THE_PERFIDIOUS_DUMMY);
+                        // Temucraft: the dummy spell (93716) that summons the Shield Focus isn't in Spell.dbc (nor in 4.3.4's):
+                        // summon it in front of Springvale; JustSummoned then casts the shield at it
+                        me->SummonCreature(NPC_SHIELD_FOCUS, me->GetNearPosition(5.0f, 0.0f), TEMPSUMMON_TIMED_DESPAWN, 30000);
                         break;
                     case EVENT_DESECRATION:
                         if (Unit* target = SelectTarget(SelectTargetMethod::Random, 0, 100.0f, true))
@@ -450,8 +452,7 @@ public:
         {
             return ValidateSpellInfo(
             {
-                SPELL_UNHOLY_POWER_HC,
-                SPELL_UNHOLY_POWER
+                SPELL_UNHOLY_POWER // Temucraft: the heroic copy (93735) isn't in Spell.dbc; the core uses this one
             });
         }
 
@@ -497,8 +498,7 @@ public:
         {
             return ValidateSpellInfo(
             {
-                SPELL_UNHOLY_POWER_HC,
-                SPELL_UNHOLY_POWER
+                SPELL_UNHOLY_POWER // Temucraft: the heroic copy (93735) isn't in Spell.dbc; the core uses this one
             });
 
             return true;

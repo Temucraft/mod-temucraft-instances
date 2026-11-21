@@ -16,6 +16,7 @@
 */
 
 #include "TemucraftTCCompat.h"
+#include "SpellMgr.h"
 #include "ScriptMgr.h"
 #include "Containers.h"
 #include "deadmines.h"
@@ -197,7 +198,8 @@ class boss_vanessa_van_cleef : public CreatureScript
             {
                 BossAI::JustEngagedWith(who);
                 Talk(SAY_AGGRO);
-                DoCastAOE(SPELL_VANESSA_ACHIEVEMENT_SPELL, true);
+                if (sSpellMgr->GetSpellInfo(SPELL_VANESSA_ACHIEVEMENT_SPELL)) // Temucraft: not in Spell.dbc (achievement only)
+                    DoCastAOE(SPELL_VANESSA_ACHIEVEMENT_SPELL, true);
                 instance->SendEncounterUnit(ENCOUNTER_FRAME_ENGAGE, me);
                 events.ScheduleEvent(EVENT_DEFLECTION, Seconds(11));
                 events.ScheduleEvent(EVENT_DEADLY_BLADES, Seconds(12));
@@ -414,8 +416,12 @@ class boss_vanessa_van_cleef : public CreatureScript
                             events.ScheduleEvent(EVENT_VENGEANCE_OF_VANCLEEF, Seconds(1) + Milliseconds(200));
                             break;
                         case EVENT_VENGEANCE_OF_VANCLEEF:
-                            DoCastSelf(SPELL_VENGEANCE_OF_VANCLEEF);
-                            events.Repeat(Seconds(2) + Milliseconds(400));
+                            // Temucraft: the spell isn't in Spell.dbc; when it is added, the buff stacks as before
+                            if (sSpellMgr->GetSpellInfo(SPELL_VENGEANCE_OF_VANCLEEF))
+                            {
+                                DoCastSelf(SPELL_VENGEANCE_OF_VANCLEEF);
+                                events.Repeat(Seconds(2) + Milliseconds(400));
+                            }
                             break;
                         case EVENT_TALK_SUICIDE_1:
                             Talk(SAY_SUICIDE_1);

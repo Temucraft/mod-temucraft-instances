@@ -12,12 +12,9 @@ UPDATE `creature_template` SET `ScriptName` = 'npc_sfk_worgen_spirit' WHERE `ent
 DELETE FROM `spell_script_names` WHERE `ScriptName` IN ('spell_ashbury_asphyxiate','spell_ashbury_dark_archangel_form','spell_ashbury_pain_and_suffering','spell_godfrey_cursed_bullets','spell_godfrey_pistol_barrage','spell_godfrey_pistol_barrage_aoe','spell_godfrey_summon_bloodthirsty_ghouls','spell_sfk_forsaken_ability','spell_sfk_shield_of_bones','spell_sfk_summon_worgen_spirit','spell_sfk_unholy_empowerment','spell_sfk_unholy_power','spell_walden_conjure_mystery_toxin','spell_walden_conjure_poisonous_mixture','spell_walden_ice_shards','spell_walden_toxic_catalyst','spell_walden_toxic_coagulent');
 INSERT INTO `spell_script_names` (`spell_id`, `ScriptName`) VALUES
 (93423, 'spell_ashbury_asphyxiate'),
-(93710, 'spell_ashbury_asphyxiate'),
 (93757, 'spell_ashbury_dark_archangel_form'),
 (93581, 'spell_ashbury_pain_and_suffering'),
-(93712, 'spell_ashbury_pain_and_suffering'),
 (93629, 'spell_godfrey_cursed_bullets'),
-(93761, 'spell_godfrey_cursed_bullets'),
 (93520, 'spell_godfrey_pistol_barrage'),
 (96344, 'spell_godfrey_pistol_barrage_aoe'),
 (93707, 'spell_godfrey_summon_bloodthirsty_ghouls'),
@@ -26,10 +23,8 @@ INSERT INTO `spell_script_names` (`spell_id`, `ScriptName`) VALUES
 (93857, 'spell_sfk_summon_worgen_spirit'),
 (93844, 'spell_sfk_unholy_empowerment'),
 (93686, 'spell_sfk_unholy_power'),
-(93735, 'spell_sfk_unholy_power'),
 (93695, 'spell_walden_conjure_mystery_toxin'),
 (93697, 'spell_walden_conjure_poisonous_mixture'),
-(93704, 'spell_walden_conjure_poisonous_mixture'),
 (93543, 'spell_walden_ice_shards'),
 (93689, 'spell_walden_toxic_catalyst'),
 (93617, 'spell_walden_toxic_coagulent');

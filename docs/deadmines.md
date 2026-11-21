@@ -25,17 +25,26 @@ notice; `instance_deadmines_classic.cpp` is AzerothCore's own classic script (GN
 
 - Built against AzerothCore's script API with the same encounter logic as the original.
 - Some Cataclysm spell effects and auras don't exist in the 3.3.5 core, so a few abilities can do nothing or less
-  than intended. 52 spells the creatures use (mostly the heroic versions of Cataclysm spells) aren't in Temucraft's
-  `Spell.dbc` and do nothing.
-- The vehicles (Helix riding the Lumbering Oaf, the magma trap, the Defias cannon) use Cataclysm vehicle ids that the
-  3.3.5 `Vehicle.dbc` doesn't have, so riding parts of these fights may not work.
+  than intended.
+- Spells: 52 spells the creatures use aren't in Temucraft's `Spell.dbc`. 42 of them are the heroic copies of a
+  normal-mode spell (from the 4.3.4 `SpellDifficulty.dbc`) and use that normal spell instead, which is in `Spell.dbc`
+  (`SPELL_MAP` in `tools/heroic_convert.py`). The three Goblin Teleporter spells are a SmartAI teleport to the same
+  spot, and the teleporter's gossip menu (12691) is in. Ripsnarl's cannon kill is done in the script. Left out, as no
+  3.3.5 spell does the same job: the Defias Cannon's stun cannonball (95494), Vanessa's heroic buff Vengeance of
+  VanCleef (95542), the vapor's Steam Aura look (95503), the rope's CLICK ME aura (95527) and the two achievement
+  spells (95650, 95654). The scripts only cast these when `Spell.dbc` has them.
+- Vehicles: the one-seat Cataclysm vehicles use a stock 3.3.5 vehicle with the same seat (Defias Watcher and Reaper
+  227, Cookie's Cauldron and James Harrington 586, Ogre Henchman 294, Defias Cannon 554, Rope 477). The ones with many
+  seats, where the seat spots are part of the fight (the Lumbering Oaf, the mine carts, Glubtok's fire wall platters,
+  Vanessa's trap and lightning rings), keep their Cataclysm vehicle id: the server gets them in `vehicle_dbc` and
+  `vehicleseat_dbc`, and the client in patch-T's `Vehicle.dbc` and `VehicleSeat.dbc`. The vehicle passengers and the
+  spell clicks (riding the reapers, cannons and ropes) are in.
 - The entrance quest givers of each faction (Lieutenant Horatio Laine, Kagtha and their groups) are left out: their
   quests don't exist here and both factions would see both.
 - 9 creature models the client doesn't have use the closest 3.3.5 model (monkeys, hobgoblins, a goblin, the mystery
   meat).
-- Loot: the world drops and the items AzerothCore or mod-temucraft-world have are in. The bosses' own Cataclysm
-  items (33 items) aren't: they need `item_template` rows and Item.dbc rows on the server and client first
-  (`tools/items.py` in mod-temucraft-world), then this module's SQL can be made again with `tools/heroic_convert.py`.
+- Loot: all of it is in. The bosses' own Cataclysm items (33) come from mod-temucraft-world (`item_template`, and
+  `item_dbc` for the server plus patch-T's `Item.dbc` for the client).
 - `TemucraftTCCompat.h` holds the few TrinityCore names the scripts use that AzerothCore doesn't have.
 
 ## Install
@@ -55,6 +64,9 @@ notice; `instance_deadmines_classic.cpp` is AzerothCore's own classic script (GN
 | world | `spawn_group_template`, `spawn_group` | group 7300 (the goblin event) |
 | world | `creature_loot_template`, `gameobject_loot_template`, `reference_loot_template`, `skinning_loot_template`, `pickpocketing_loot_template`, `smart_scripts`, `conditions` | loot, SmartAI and spell targets of the new creatures |
 | world | `spell_script_names` | the spell scripts |
+| world | `vehicle_template_accessory`, `npc_spellclick_spells` | vehicle passengers and riding |
+| world | `vehicle_dbc`, `vehicleseat_dbc` | the 8 Cataclysm vehicles that keep their id (1259, 1322, 1365, 1366, 1371, 1372, 1396, 1397) |
+| world | `gossip_menu`, `gossip_menu_option` | the Goblin Teleporter (menu 12691) |
 | world | `mapdifficulty_dbc` | heroic mode of map 36 (ID 758) |
 | world | `dungeon_access_template` | level 80 for the heroic mode (ID 200) |
 

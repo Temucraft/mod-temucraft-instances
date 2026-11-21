@@ -16,6 +16,7 @@
 */
 
 #include "TemucraftTCCompat.h"
+#include "SpellMgr.h"
 #include "shadowfang_keep.h"
 #include "Containers.h"
 #include "GameEventMgr.h"
@@ -99,7 +100,8 @@ struct boss_lord_godfrey : public BossAI
     {
         BossAI::JustEngagedWith(who);
         Talk(instance->GetData(DATA_TEAM_IN_INSTANCE) == ALLIANCE ? SAY_AGGRO_ALLIANCE : SAY_AGGRO_HORDE);
-        DoCastAOE(SPELL_BULLET_TIME_RESET_CREDIT);
+        if (sSpellMgr->GetSpellInfo(SPELL_BULLET_TIME_RESET_CREDIT)) // Temucraft: not in Spell.dbc (achievement only)
+            DoCastAOE(SPELL_BULLET_TIME_RESET_CREDIT);
         instance->SendEncounterUnit(ENCOUNTER_FRAME_ENGAGE, me);
         events.ScheduleEvent(EVENT_MORTAL_WOUND, 3s, 4s);
         events.ScheduleEvent(EVENT_SUMMON_BLOODTHIRSTY_GHOULS, 6s);
@@ -148,7 +150,8 @@ struct boss_lord_godfrey : public BossAI
             case NPC_BLOODTHIRSTY_GHOUL:
                 if (killer->GetEntry() == BOSS_LORD_GODFREY && IsHeroic())
                 {
-                    DoCastAOE(SPELL_BULLET_TIME_CREDIT, true);
+                    if (sSpellMgr->GetSpellInfo(SPELL_BULLET_TIME_CREDIT)) // Temucraft: not in Spell.dbc (achievement only)
+                        DoCastAOE(SPELL_BULLET_TIME_CREDIT, true);
                     _killedGhoulCounter++;
                 }
                 break;

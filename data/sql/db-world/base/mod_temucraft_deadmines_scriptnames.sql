@@ -23,7 +23,6 @@ UPDATE `creature_template` SET `ScriptName` = 'npc_deadmines_helix_nightmare' WH
 DELETE FROM `spell_script_names` WHERE `ScriptName` IN ('spell_cookie_satiated','spell_cookie_throw_food_targeting','spell_deadmines_bloodbath','spell_deadmines_magma_trap_throw_to_location','spell_deadmines_on_fire','spell_deadmines_ride_magma_vehicle','spell_foe_reaper_5000_acquire_target','spell_foe_reaper_5000_fixate','spell_foe_reaper_5000_fixate_targeting','spell_glubtok_blossom_targeting','spell_helix_chest_bomb','spell_helix_chest_bomb_emote','spell_helix_force_player_to_ride_oaf','spell_helix_helix_ride','spell_helix_helix_ride_face_timer_aura','spell_helix_oaf_grab_targeting','spell_helix_oaf_smash','spell_helix_ride_face_targeting','spell_helix_ride_vehicle','spell_helix_sticky_bomb_periodic_trigger','spell_helix_throw_bomb_targeting','spell_ripsnarl_go_for_the_throat_targeting','spell_ripsnarl_summon_vapor_targeting','spell_vanessa_backslash_targeting');
 INSERT INTO `spell_script_names` (`spell_id`, `ScriptName`) VALUES
 (89267, 'spell_cookie_satiated'),
-(92834, 'spell_cookie_satiated'),
 (89268, 'spell_cookie_throw_food_targeting'),
 (89740, 'spell_cookie_throw_food_targeting'),
 (90561, 'spell_cookie_throw_food_targeting'),
@@ -51,7 +50,6 @@ INSERT INTO `spell_script_names` (`spell_id`, `ScriptName`) VALUES
 (88351, 'spell_helix_helix_ride_face_timer_aura'),
 (88289, 'spell_helix_oaf_grab_targeting'),
 (88300, 'spell_helix_oaf_smash'),
-(91568, 'spell_helix_oaf_smash'),
 (88349, 'spell_helix_ride_face_targeting'),
 (88360, 'spell_helix_ride_vehicle'),
 (88329, 'spell_helix_sticky_bomb_periodic_trigger'),

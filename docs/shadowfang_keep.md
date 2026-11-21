@@ -32,16 +32,22 @@ AzerothCore's notice). The Cataclysm Apothecary Hummel script isn't ported: Azer
 
 - Built against AzerothCore's script API with the same encounter logic as the original.
 - Some Cataclysm spell effects and auras don't exist in the 3.3.5 core, so a few abilities can do nothing or less
-  than intended. 10 spells the creatures use aren't in Temucraft's `Spell.dbc` and do nothing.
-- Four Cataclysm area triggers (6422, 6424, 6425, 6431: talk before Springvale, the troops outside, Ivar's talk and
-  Godfrey's intro) aren't in the 3.3.5 `AreaTrigger.dbc`, so those small scenes don't start.
+  than intended.
+- Spells: 10 spells the creatures use aren't in Temucraft's `Spell.dbc`. Six are heroic copies of a normal-mode spell
+  and use that spell (Pustulant Spit, Conjure Poisonous Mixture, Asphyxiate, Pain and Suffering, Unholy Power, Cursed
+  Bullets); the Mystery Toxin's Shrink uses the 3.3.5 Shrink aura (35179). Springvale's Shield of the Perfidious dummy
+  isn't in 4.3.4 either: the script summons the Shield Focus itself. The two Bullet Time achievement spells are left
+  out (no achievement in 3.3.5).
+- The four Cataclysm area triggers (6422, 6424, 6425, 6431: talk before Springvale, the troops outside, Ivar's talk
+  and Godfrey's intro) are in: the server gets them in the `areatrigger` table, the client in patch-T's
+  `AreaTrigger.dbc`.
+- Baron Ashbury's vehicle uses the stock 3.3.5 vehicle 586 (one seat, for his wings).
 - The Wailing Guardsmen and Tormented Officers Springvale calls are new creatures and are scripted; the ones spawned
   in the halls are the classic creatures with the Cataclysm stats.
 - 7 creature models the client doesn't have use the closest 3.3.5 model (the Forsaken Blightspreader and the Rabid
   Mastiff).
-- Loot: the world drops and the items AzerothCore or mod-temucraft-world have are in. The bosses' own Cataclysm
-  items (37 items) aren't: they need `item_template` rows and Item.dbc rows on the server and client first
-  (`tools/items.py` in mod-temucraft-world), then this module's SQL can be made again with `tools/heroic_convert.py`.
+- Loot: all of it is in. The bosses' own Cataclysm items (37) come from mod-temucraft-world (`item_template`, and
+  `item_dbc` for the server plus patch-T's `Item.dbc` for the client).
 - `TemucraftTCCompat.h` holds the few TrinityCore names the scripts use that AzerothCore doesn't have.
 
 ## Install
@@ -62,6 +68,8 @@ AzerothCore's notice). The Cataclysm Apothecary Hummel script isn't ported: Azer
 | world | `spawn_group_template`, `spawn_group` | groups 7350 to 7370 (troops and disease clouds) |
 | world | `creature_loot_template`, `gameobject_loot_template`, `reference_loot_template`, `skinning_loot_template`, `pickpocketing_loot_template`, `smart_scripts` | loot and SmartAI of the new creatures |
 | world | `spell_script_names`, `areatrigger_scripts` | the spell and area trigger scripts |
+| world | `areatrigger` | the four Cataclysm area triggers (6422, 6424, 6425, 6431) |
+| world | `vehicle_template_accessory`, `npc_spellclick_spells` | Baron Ashbury's wings |
 | world | `mapdifficulty_dbc` | heroic mode of map 33 (ID 756) |
 | world | `dungeon_access_template` | level 80 for the heroic mode (ID 201) |
 

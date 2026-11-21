@@ -16,6 +16,7 @@
 */
 
 #include "TemucraftTCCompat.h"
+#include "SpellMgr.h"
 #include "ObjectMgr.h"
 #include "ScriptMgr.h"
 #include "Containers.h"
@@ -219,7 +220,8 @@ class boss_captain_cookie : public CreatureScript
                             break;
                         case EVENT_CAULDRON_FIRE:
                             DoCastSelf(SPELL_CAULDRON_FIRE, true);
-                            DoCastAOE(SPELL_COOKIE_ACHIEVEMENT_AURA, true);
+                            if (sSpellMgr->GetSpellInfo(SPELL_COOKIE_ACHIEVEMENT_AURA)) // Temucraft: not in Spell.dbc (achievement only)
+                                DoCastAOE(SPELL_COOKIE_ACHIEVEMENT_AURA, true);
                             events.ScheduleEvent(EVENT_THROW_FOOD, Milliseconds(1));
                             break;
                         case EVENT_THROW_FOOD:
@@ -330,8 +332,7 @@ class spell_cookie_satiated : public SpellScriptLoader
             {
                 return ValidateSpellInfo(
                     {
-                        SPELL_NAUSEATED,
-                        SPELL_NAUSEATED_HC
+                        SPELL_NAUSEATED // Temucraft: the heroic copy (92066) isn't in Spell.dbc; the core uses this one
                     });
             }
 
